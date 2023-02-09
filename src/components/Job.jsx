@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import { Row, Col } from 'react-bootstrap'
+import { Row, Col, Alert } from 'react-bootstrap'
 import { Heart } from 'react-bootstrap-icons'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 const Job = ({ data, i }) => {
   const [saved, setSaved] = useState(1)
+  const favourites = useSelector((state) => state.favourites.companies)
   const dispatch = useDispatch()
 
   return (
@@ -31,11 +32,18 @@ const Job = ({ data, i }) => {
               payload: i
             })
           } else {
-            e.target.style.fill = "red";
-            dispatch({
-              type: "ADD_TO_FAVOURITES",
-              payload: data
-            })
+            if (favourites.includes(data.company_name) === false) {
+              e.target.style.fill = "red";
+              dispatch({
+                type: "ADD_TO_FAVOURITES",
+                payload: data.company_name
+              })
+            }
+            else {
+              <Alert variant="danger">
+                This is a  alert—check it out!
+              </Alert>
+            }
           }
         }} />
       </Col>

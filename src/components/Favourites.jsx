@@ -26,7 +26,7 @@ const Favourites = () => {
                                     key={i}
                                 >
                                     <Col xs={6}>
-                                        <Link to={`/${company.company_name}`}>{company.company_name}</Link>
+                                        <Link to={`/${company}`}>{company}</Link>
                                     </Col>
                                     <Col className='text-right' xs={6}>
                                         <Trash className="delete-button" onClick={() => {
