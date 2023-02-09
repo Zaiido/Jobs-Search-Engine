@@ -1,12 +1,15 @@
 import { useState } from 'react'
-import { Container, Row, Col, Form } from 'react-bootstrap'
+import { Container, Row, Col, Form, Button } from 'react-bootstrap'
+import { HeartFill } from 'react-bootstrap-icons'
+import { useNavigate } from 'react-router-dom'
 import Job from './Job'
 
 const MainSearch = () => {
+  const navigate = useNavigate();
   const [query, setQuery] = useState('')
   const [jobs, setJobs] = useState([])
 
-  const baseEndpoint = 'https://strive-jobs-api.herokuapp.com/jobs?search='
+  const baseEndpoint = "https://strive-benchmark.herokuapp.com/api/jobs?search="
 
   const handleChange = (e) => {
     setQuery(e.target.value)
@@ -31,8 +34,9 @@ const MainSearch = () => {
   return (
     <Container>
       <Row>
-        <Col xs={10} className="mx-auto my-3">
+        <Col xs={10} className="mx-auto my-3 d-flex align-items-center justify-content-between">
           <h1>Remote Jobs Search</h1>
+          <Button variant='outline-success' onClick={() => navigate("/favourites")}>Go to Favourites <HeartFill /></Button>
         </Col>
         <Col xs={10} className="mx-auto">
           <Form onSubmit={handleSubmit}>
@@ -45,8 +49,8 @@ const MainSearch = () => {
           </Form>
         </Col>
         <Col xs={10} className="mx-auto mb-5">
-          {jobs.map((jobData) => (
-            <Job key={jobData._id} data={jobData} />
+          {jobs.map((jobData, i) => (
+            <Job key={jobData._id} data={jobData} i={i} />
           ))}
         </Col>
       </Row>
