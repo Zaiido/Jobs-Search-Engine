@@ -9,3 +9,7 @@ svg {
 .delete-button:hover {
   fill: red;
 }
+
+.favourite {
+  fill: red
+}

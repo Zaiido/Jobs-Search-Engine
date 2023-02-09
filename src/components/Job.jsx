@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import { Row, Col, Alert } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
 import { Heart } from 'react-bootstrap-icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-const Job = ({ data, i }) => {
+const Job = ({ data, i, favourite }) => {
   const [saved, setSaved] = useState(1)
   const favourites = useSelector((state) => state.favourites.companies)
   const dispatch = useDispatch()
@@ -23,8 +23,10 @@ const Job = ({ data, i }) => {
         </a>
       </Col>
       <Col className='text-right' xs={6}>
-        <Heart onClick={(e) => {
-          setSaved(saved + 1)
+        <Heart className={favourite ? "favourite" : ""} onClick={(e) => {
+          if (favourite === false) {
+            setSaved(saved + 1)
+          }
           if (saved % 2 === 0) {
             e.target.style.fill = "black";
             dispatch({
@@ -38,11 +40,8 @@ const Job = ({ data, i }) => {
                 type: "ADD_TO_FAVOURITES",
                 payload: data.company_name
               })
-            }
-            else {
-              <Alert variant="danger">
-                This is a  alert—check it out!
-              </Alert>
+            } else {
+              alert("The company is already saved!")
             }
           }
         }} />

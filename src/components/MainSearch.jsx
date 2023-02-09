@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import { HeartFill } from 'react-bootstrap-icons'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Job from './Job'
 
@@ -8,6 +9,8 @@ const MainSearch = () => {
   const navigate = useNavigate();
   const [query, setQuery] = useState('')
   const [jobs, setJobs] = useState([])
+  const favourites = useSelector((state) => state.favourites.companies)
+
 
   const baseEndpoint = "https://strive-benchmark.herokuapp.com/api/jobs?search="
 
@@ -50,7 +53,7 @@ const MainSearch = () => {
         </Col>
         <Col xs={10} className="mx-auto mb-5">
           {jobs.map((jobData, i) => (
-            <Job key={jobData._id} data={jobData} i={i} />
+            favourites.includes(jobData.company_name) ? <Job key={jobData._id} data={jobData} i={i} favourite={true} /> : <Job key={jobData._id} data={jobData} i={i} favourite={false} />
           ))}
         </Col>
       </Row>
