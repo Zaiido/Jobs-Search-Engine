@@ -20,7 +20,7 @@ const mainReducer = (state = initialState, action) => {
                 ...state,
                 favourites: {
                     ...state.favourites,
-                    companies: state.favourites.companies.filter((company, i) => i !== action.payload)
+                    companies: state.favourites.companies.filter((company) => company !== action.payload)
                 }
             }
 

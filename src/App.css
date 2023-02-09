@@ -1,15 +1,13 @@
-svg {
+.text-right svg {
   cursor: pointer;
+  fill: rgb(255, 230, 2);
 }
 
-.delete-button {
+svg.delete-button {
   transition: all 0.2s ease-in-out;
+  fill: black;
 }
 
 .delete-button:hover {
   fill: red;
-}
-
-.favourite {
-  fill: red
 }

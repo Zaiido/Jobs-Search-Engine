@@ -1,12 +1,9 @@
-import { useState } from 'react'
 import { Row, Col } from 'react-bootstrap'
-import { Heart } from 'react-bootstrap-icons'
-import { useDispatch, useSelector } from 'react-redux'
+import { Heart, HeartFill } from 'react-bootstrap-icons'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-const Job = ({ data, i, favourite }) => {
-  const [saved, setSaved] = useState(1)
-  const favourites = useSelector((state) => state.favourites.companies)
+const Job = ({ data, favourite }) => {
   const dispatch = useDispatch()
 
   return (
@@ -23,28 +20,41 @@ const Job = ({ data, i, favourite }) => {
         </a>
       </Col>
       <Col className='text-right' xs={6}>
-        <Heart className={favourite ? "favourite" : ""} onClick={(e) => {
-          if (favourite === false) {
-            setSaved(saved + 1)
+        {favourite ?
+          <HeartFill onClick={(e) => {
+            dispatch({
+              type: "REMOVE_FROM_FAVOURITES",
+              payload: data.company_name
+            })
+          }} />
+          :
+          <Heart onClick={(e) => {
+            dispatch({
+              type: "ADD_TO_FAVOURITES",
+              payload: data.company_name
+            })
           }
-          if (saved % 2 === 0) {
+
+
+          } />}
+        {/* <Heart className={favourite ? "favourite" : ""} onClick={(e) => {
+
+          if (favourite === false) {
+            e.target.style.fill = "red";
+            dispatch({
+              type: "ADD_TO_FAVOURITES",
+              payload: data.company_name
+            })
+          }
+          else {
             e.target.style.fill = "black";
             dispatch({
               type: "REMOVE_FROM_FAVOURITES",
-              payload: i
+              payload: data.company_name
             })
-          } else {
-            if (favourites.includes(data.company_name) === false) {
-              e.target.style.fill = "red";
-              dispatch({
-                type: "ADD_TO_FAVOURITES",
-                payload: data.company_name
-              })
-            } else {
-              alert("The company is already saved!")
-            }
           }
-        }} />
+
+        }} /> */}
       </Col>
     </Row>
   )

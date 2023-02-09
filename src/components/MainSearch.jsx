@@ -39,7 +39,7 @@ const MainSearch = () => {
       <Row>
         <Col xs={10} className="mx-auto my-3 d-flex align-items-center justify-content-between">
           <h1>Remote Jobs Search</h1>
-          <Button variant='outline-success' onClick={() => navigate("/favourites")}>Go to Favourites <HeartFill /></Button>
+          <Button variant='outline-primary' onClick={() => navigate("/favourites")}>Go to Favourites <HeartFill /></Button>
         </Col>
         <Col xs={10} className="mx-auto">
           <Form onSubmit={handleSubmit}>
@@ -52,8 +52,8 @@ const MainSearch = () => {
           </Form>
         </Col>
         <Col xs={10} className="mx-auto mb-5">
-          {jobs.map((jobData, i) => (
-            favourites.includes(jobData.company_name) ? <Job key={jobData._id} data={jobData} i={i} favourite={true} /> : <Job key={jobData._id} data={jobData} i={i} favourite={false} />
+          {jobs.map((jobData) => (
+            favourites.includes(jobData.company_name) ? <Job key={jobData._id} data={jobData} favourite={true} /> : <Job key={jobData._id} data={jobData} favourite={false} />
           ))}
         </Col>
       </Row>

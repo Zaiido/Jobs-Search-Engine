@@ -15,7 +15,7 @@ const Favourites = () => {
                 <Row>
                     <Col xs={10} className="mx-auto my-3 d-flex align-items-center justify-content-between">
                         <h1>Favourites</h1>
-                        <Button variant='outline-success' onClick={() => navigate("/")}><HouseDoorFill /></Button>
+                        <Button variant='outline-primary' onClick={() => navigate("/")}><HouseDoorFill /></Button>
                     </Col>
                     <Col xs={10} className="mx-auto mb-5">
                         {favourites.map((company, i) => {
@@ -32,7 +32,7 @@ const Favourites = () => {
                                         <Trash className="delete-button" onClick={() => {
                                             dispatch({
                                                 type: "REMOVE_FROM_FAVOURITES",
-                                                payload: i
+                                                payload: company
                                             })
                                         }} />
                                     </Col>
