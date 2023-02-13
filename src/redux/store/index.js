@@ -1,4 +1,5 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import companySearchReducer from "../reducers/companySearchReducer";
 import favouritesReducer from "../reducers/favouritesReducer";
 import mainSearchResultsReducer from "../reducers/mainSearchResultsReducer";
 
@@ -6,7 +7,8 @@ import mainSearchResultsReducer from "../reducers/mainSearchResultsReducer";
 const store = configureStore({
     reducer: combineReducers({
         favourites: favouritesReducer,
-        results: mainSearchResultsReducer
+        results: mainSearchResultsReducer,
+        companySearch: companySearchReducer
     })
 })
 
