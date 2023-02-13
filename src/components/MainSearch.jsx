@@ -10,7 +10,7 @@ const MainSearch = () => {
   const navigate = useNavigate();
   const [query, setQuery] = useState('')
   const favourites = useSelector((state) => state.favourites.companies)
-  const searchResults = useSelector((state) => state.results.search)
+  const searchResults = useSelector((state) => state.mainSearch.mainResults)
   const dispatch = useDispatch();
 
 

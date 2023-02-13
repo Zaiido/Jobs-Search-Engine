@@ -7,7 +7,7 @@ import mainSearchResultsReducer from "../reducers/mainSearchResultsReducer";
 const store = configureStore({
     reducer: combineReducers({
         favourites: favouritesReducer,
-        results: mainSearchResultsReducer,
+        mainSearch: mainSearchResultsReducer,
         companySearch: companySearchReducer
     })
 })

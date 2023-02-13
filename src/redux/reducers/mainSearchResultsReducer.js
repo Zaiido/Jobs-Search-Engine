@@ -1,7 +1,7 @@
 import { GET_JOBS } from "../actions";
 
 const initialState = {
-    search: []
+    mainResults: []
 }
 
 const mainSearchResultsReducer = (state = initialState, action) => {
@@ -10,7 +10,7 @@ const mainSearchResultsReducer = (state = initialState, action) => {
         case GET_JOBS:
             return {
                 ...state,
-                search: action.payload
+                mainResults: action.payload
             }
 
         default:
