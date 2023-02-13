@@ -2,6 +2,7 @@ import { Row, Col } from 'react-bootstrap'
 import { Heart, HeartFill } from 'react-bootstrap-icons'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { addToFavouritesAction, removeFromFavouritesAction } from '../redux/actions'
 
 const Job = ({ data, favourite }) => {
   const dispatch = useDispatch()
@@ -22,39 +23,15 @@ const Job = ({ data, favourite }) => {
       <Col className='text-right' xs={6}>
         {favourite ?
           <HeartFill onClick={(e) => {
-            dispatch({
-              type: "REMOVE_FROM_FAVOURITES",
-              payload: data.company_name
-            })
+            dispatch(removeFromFavouritesAction(data.company_name))
           }} />
           :
           <Heart onClick={(e) => {
-            dispatch({
-              type: "ADD_TO_FAVOURITES",
-              payload: data.company_name
-            })
+            dispatch(addToFavouritesAction(data.company_name))
           }
 
 
           } />}
-        {/* <Heart className={favourite ? "favourite" : ""} onClick={(e) => {
-
-          if (favourite === false) {
-            e.target.style.fill = "red";
-            dispatch({
-              type: "ADD_TO_FAVOURITES",
-              payload: data.company_name
-            })
-          }
-          else {
-            e.target.style.fill = "black";
-            dispatch({
-              type: "REMOVE_FROM_FAVOURITES",
-              payload: data.company_name
-            })
-          }
-
-        }} /> */}
       </Col>
     </Row>
   )

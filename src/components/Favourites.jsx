@@ -3,6 +3,7 @@ import { HouseDoorFill, Trash } from "react-bootstrap-icons"
 import { Link } from "react-router-dom"
 import { Button, Col, Container, Row } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
+import { removeFromFavouritesAction } from "../redux/actions"
 
 const Favourites = () => {
     const favourites = useSelector((state) => state.favourites.companies)
@@ -30,10 +31,7 @@ const Favourites = () => {
                                     </Col>
                                     <Col className='text-right' xs={6}>
                                         <Trash className="delete-button" onClick={() => {
-                                            dispatch({
-                                                type: "REMOVE_FROM_FAVOURITES",
-                                                payload: company
-                                            })
+                                            dispatch(removeFromFavouritesAction(company))
                                         }} />
                                     </Col>
                                 </Row>

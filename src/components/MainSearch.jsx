@@ -1,37 +1,22 @@
 import { useState } from 'react'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import { HeartFill } from 'react-bootstrap-icons'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { mainSearchResultsAction } from '../redux/actions'
 import Job from './Job'
 
 const MainSearch = () => {
   const navigate = useNavigate();
   const [query, setQuery] = useState('')
-  const [jobs, setJobs] = useState([])
   const favourites = useSelector((state) => state.favourites.companies)
+  const searchResults = useSelector((state) => state.results.search)
+  const dispatch = useDispatch();
 
 
-  const baseEndpoint = "https://strive-benchmark.herokuapp.com/api/jobs?search="
 
   const handleChange = (e) => {
     setQuery(e.target.value)
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-
-    try {
-      const response = await fetch(baseEndpoint + query + '&limit=20')
-      if (response.ok) {
-        const { data } = await response.json()
-        setJobs(data)
-      } else {
-        alert('Error fetching results')
-      }
-    } catch (error) {
-      console.log(error)
-    }
   }
 
   return (
@@ -42,7 +27,10 @@ const MainSearch = () => {
           <Button variant='outline-primary' onClick={() => navigate("/favourites")}>Go to Favourites <HeartFill /></Button>
         </Col>
         <Col xs={10} className="mx-auto">
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={(e) => {
+            e.preventDefault();
+            dispatch(mainSearchResultsAction(query))
+          }}>
             <Form.Control
               type="search"
               value={query}
@@ -52,7 +40,7 @@ const MainSearch = () => {
           </Form>
         </Col>
         <Col xs={10} className="mx-auto mb-5">
-          {jobs.map((jobData) => (
+          {searchResults.map((jobData) => (
             favourites.includes(jobData.company_name) ? <Job key={jobData._id} data={jobData} favourite={true} /> : <Job key={jobData._id} data={jobData} favourite={false} />
           ))}
         </Col>
