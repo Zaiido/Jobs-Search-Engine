@@ -45,7 +45,6 @@ export const companySearchResultsAction = (companyName) => {
             const response = await fetch("https://strive-benchmark.herokuapp.com/api/jobs?company=" + companyName)
             if (response.ok) {
                 const { data } = await response.json()
-                console.log(data)
                 dispatch({
                     type: GET_JOBS_PER_COMPANY,
                     payload: data
