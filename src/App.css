@@ -11,3 +11,12 @@ svg.delete-button {
 .delete-button:hover {
   fill: red;
 }
+
+.alert {
+  margin-top: 50px;
+}
+
+.spinner-border {
+  margin-top: 100px;
+  margin-left: 50%;
+}

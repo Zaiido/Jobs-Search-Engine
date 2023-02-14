@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Container, Row, Col, Form, Button } from 'react-bootstrap'
+import { Container, Row, Col, Form, Button, Spinner, Alert } from 'react-bootstrap'
 import { HeartFill } from 'react-bootstrap-icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -11,6 +11,8 @@ const MainSearch = () => {
   const [query, setQuery] = useState('')
   const favourites = useSelector((state) => state.favourites.companies)
   const searchResults = useSelector((state) => state.mainSearch.mainResults)
+  const isLoading = useSelector((state) => state.mainSearch.isLoading)
+  const isError = useSelector((state) => state.mainSearch.isError)
   const dispatch = useDispatch();
 
 
@@ -40,6 +42,8 @@ const MainSearch = () => {
           </Form>
         </Col>
         <Col xs={10} className="mx-auto mb-5">
+          {isLoading && <Spinner animation="border" variant="primary" />}
+          {isError && <Alert variant="danger">Something went wrong 😐</Alert>}
           {searchResults.map((jobData) => (
             favourites.includes(jobData.company_name) ? <Job key={jobData._id} data={jobData} favourite={true} /> : <Job key={jobData._id} data={jobData} favourite={false} />
           ))}
